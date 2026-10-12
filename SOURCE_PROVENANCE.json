@@ -1,0 +1,75 @@
+{
+  "snapshot_date": "2026-10-12",
+  "scope": "Selected source snapshots, not the complete operational repositories. No production logs, participant data, credentials, model weights or private academic documents.",
+  "files": [
+    {
+      "file": "mission_ledger.py",
+      "source_project": "go2_ws",
+      "source_relative_path": "tools/mission_ledger/mission_ledger.py",
+      "original_sha256": "75b1f09206b70e1a30015c4e0974dc8b8ad6c6031352425da62494e6c9323202",
+      "export_sha256": "75b1f09206b70e1a30015c4e0974dc8b8ad6c6031352425da62494e6c9323202",
+      "changes": []
+    },
+    {
+      "file": "split_check.py",
+      "source_project": "다운로드",
+      "source_relative_path": "person-twin-mvp-v7/person-twin-mvp/video_twin/split_check.py",
+      "original_sha256": "2172c6feb35e0973e8e503dd84a6fe5430d5c06efd01c0b4ae364d0c8d1b7b44",
+      "export_sha256": "2172c6feb35e0973e8e503dd84a6fe5430d5c06efd01c0b4ae364d0c8d1b7b44",
+      "changes": []
+    },
+    {
+      "file": "test_split_check.py",
+      "source_project": "다운로드",
+      "source_relative_path": "person-twin-mvp-v7/person-twin-mvp/video_twin/test_split_check.py",
+      "original_sha256": "0701b6a4de638b6d68b5b14569c23d9b57c8ea3142f621fb78f54f3ed389905c",
+      "export_sha256": "057bd85cd73f7d5c45c02c681d46f784fa224f6cc1af201a4940cbeb5e6f073c",
+      "changes": [
+        {
+          "from": "from video_twin.split_check import",
+          "to": "from split_check import"
+        }
+      ]
+    },
+    {
+      "file": "fault_injection.py",
+      "source_project": "oclo",
+      "source_relative_path": "04_소프트웨어/src/opengraph_parity/simulation/fault_injection.py",
+      "original_sha256": "47d24de11e4b552d66aea7c8db1559c72763ebf7e199fb2e2c26da296c1d8668",
+      "export_sha256": "47d24de11e4b552d66aea7c8db1559c72763ebf7e199fb2e2c26da296c1d8668",
+      "changes": []
+    },
+    {
+      "file": "baseline_drift.py",
+      "source_project": "workspace",
+      "source_relative_path": "ecorobotics/modalities/integration/baseline_drift.py",
+      "original_sha256": "ae7ae2a97e0f77641e532f8c2a5d9a08b20f1713cef724f1b5a805355b9c452a",
+      "export_sha256": "ae7ae2a97e0f77641e532f8c2a5d9a08b20f1713cef724f1b5a805355b9c452a",
+      "changes": []
+    },
+    {
+      "file": "test_baseline_drift.py",
+      "source_project": "workspace",
+      "source_relative_path": "ecorobotics/tests/test_baseline_drift.py",
+      "original_sha256": "4f21bb71dff6c439d97c741fe747de5fc5b8249239335527fb9e0241b8aa2cc1",
+      "export_sha256": "be0bc8594b1e2b8485b768188bd359803bd907696a07bce271fd42c1e2cacf29",
+      "changes": [
+        {
+          "from": "from modalities.integration.baseline_drift import",
+          "to": "from baseline_drift import"
+        }
+      ]
+    },
+    {
+      "file": "test_mission_ledger_units.py",
+      "source_project": "go2_ws",
+      "source_relative_path": "tools/mission_ledger/tests/test_mission_ledger.py",
+      "selected_functions": [
+        "test_authority_cause_strips_nested_prefix",
+        "test_split_by_day_at_kst_midnight",
+        "test_hold_flags"
+      ],
+      "changes": "Kept three existing tests that do not need recorded robot sessions; adjusted import preamble."
+    }
+  ]
+}
