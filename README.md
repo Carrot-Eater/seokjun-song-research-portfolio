@@ -1,22 +1,31 @@
-# Seokjun Song | Environmental sensing & autonomous robotics
+# Seokjun Song | Research & engineering portfolio
 
-Environmental engineering undergraduate at **Seoul National University of Science and Technology (SeoulTech)**. I build research software around autonomous inspection, chemical sensing and evaluation of learning systems. I am interested in research degrees starting in the second half of 2027.
+Environmental engineering undergraduate at **Seoul National University of Science and Technology (SeoulTech)**. My main research direction is edge robotics for autonomous patrol, environmental sensing and leak investigation. **PersonTwin** is a second line of work on personalized behavioural prediction and its evaluation. I am interested in research degrees starting in the second half of 2027.
 
-My main direction is an edge robot that patrols industrial environments, gathers useful measurements and investigates suspected leaks. Mining and solar infrastructure are application interests. A second direction, **PersonTwin**, studies when personalized models actually predict unseen human behaviour beyond simple baselines.
+**Browse: [All 36 work items](ALL_WORK.md) · [한국어 안내](README.ko.md) · [Technical stack](TECHNOLOGY_MATRIX.md) · [Coverage and exclusions](COVERAGE.md)**
 
-## Research projects
+## Browse by field
 
-| Project | Work represented here | Current maturity |
-|---|---|---|
-| Go2 autonomous exploration and patrol | ROS 2 / Nav2 integration, Jetson operation, mission state machine, motion guards, browser supervision and operational evidence | Research robot prototype; field reliability remains under evaluation |
-| Gas-source localization | Simulation comparisons, scorer consistency, failure attribution and evaluation protocols | Simulation research and manuscript preparation; no claim of deployed leak detection |
-| Electronic nose and EcoRobotics sensing | MOX data pipelines, cross-array transfer, drift analysis, MQTT/schema integration | Software and dataset experiments; end-to-end industrial deployment not established |
-| OCLO / robot learning data quality | Multimodal timing, fault injection, dataset integrity and downstream learning evaluation | Synthetic/public-data experiments and software tooling |
-| PersonTwin | Person-disjoint evaluation, duplicate checks, personalized prediction and baseline controls | Research prototype; incremental predictive value remains an open question |
-| Infrastructure digital twins | Connecting maps, sensor events and inspection workflows | Component prototypes and research planning |
-| Solar / mining robotics | Reusing perception and navigation for inspection and monitoring | Proposed applications, not completed industry projects |
+This catalog organizes the inspected research and application work into **8 fields and 36 work items**. Items include components, related studies and design-stage work within larger project families. They are not 36 completed projects or publications. Coursework is excluded.
 
-Read the [project dossier](PROJECTS.md), [technology matrix](TECHNOLOGY_MATRIX.md) and [evidence boundaries](EVIDENCE.md).
+| Field / 분야 | Work items |
+|---|---:|
+| [Field robotics & autonomy · 로봇 자율주행·미션](areas/robotics/README.md) | 5 |
+| [Drones & mapping · 드론·지도·3D 재구성](areas/aerial-mapping/README.md) | 3 |
+| [Environmental sensing · 전자코·환경·청각 센싱](areas/environmental-sensing/README.md) | 6 |
+| [Gas-source localization · 가스 누출원 탐색·평가](areas/gas-localization/README.md) | 3 |
+| [Robot-learning data quality · 로봇 학습 데이터·OCLO](areas/robot-learning-data/README.md) | 4 |
+| [Operations software · 관제·웹·배포](areas/operations/README.md) | 3 |
+| [PersonTwin & human modelling · PersonTwin 연구·서비스](areas/persontwin/README.md) | 11 |
+| [Research applications · 태양광·마이닝 연구 기획](areas/applications/README.md) | 1 |
+
+Each item has its own page covering the problem, implementation, technologies, local evidence, current limits and upstream scope. The catalog includes the PersonTwin research pipeline and its participant, coaching, character, memory and operations applications.
+
+## What is public here
+
+All 36 cards and the area indexes are public. **Four selected implementation modules** and their associated tests/provenance are also published below. The full original project trees have not been released. Cards explicitly say when only documentation is public.
+
+The [research dossier](PROJECTS.md) adds context for the core research lines. The [evidence guide](EVIDENCE.md) separates historical experiments, software prototypes, hardware designs and future applications. Research manuscripts remain in preparation.
 
 ## Inspect and run selected source
 

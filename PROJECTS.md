@@ -1,4 +1,6 @@
-# Project dossier
+# Core research dossier
+
+This is a focused narrative for the main research lines. For the expanded eight-field catalog including services, hardware design and integration work, use [All 36 work items](ALL_WORK.md).
 
 Snapshot: 12 October 2026. This document separates implemented software from the research questions it motivates.
 

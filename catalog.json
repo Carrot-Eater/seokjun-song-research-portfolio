@@ -1,0 +1,661 @@
+{
+  "reviewed": "2026-10-12",
+  "fields": 8,
+  "work_items": 36,
+  "coursework_included": false,
+  "full_source_release": false,
+  "items": [
+    {
+      "area": "robotics",
+      "slug": "go2-autonomy",
+      "title": "Go2 exploration, patrol and navigation",
+      "title_ko": "Go2 탐색·순찰·자율주행",
+      "status": "Robot prototype",
+      "summary": "Integrate a quadruped navigation stack with mission logic and operator supervision for environmental inspection.",
+      "stack": "Python; ROS 2; Nav2; LiDAR / Mid-360; SLAM integration; Jetson Orin NX; browser supervision",
+      "work": [
+        "Mapping and navigation integration, patrol states, motion guards and recovery handling.",
+        "Incident-to-regression records, localization/pose-graph failure investigations and planner-proposal evaluation.",
+        "Edge-compute operation and inspection interfaces; some language/vision inference uses a server."
+      ],
+      "evidence": "Go2 source workspace, deployment notes, incident records and the field-robotics inventory.",
+      "limits": "Historical robot trials are not a measured industrial reliability guarantee. Full onboard VLM inference, physical gas localization and a completed Rust controller are not established here.",
+      "attribution": "Builds on h-naderi/unitree-go2-slam-nav2, ROS 2, Nav2 and upstream SLAM components. Integration and evaluation are the represented work.",
+      "code": []
+    },
+    {
+      "area": "robotics",
+      "slug": "mission-accounting",
+      "title": "Mission and intervention accounting",
+      "title_ko": "미션·개입·자율시간 분석",
+      "status": "Published source",
+      "summary": "Convert robot event streams into explicit sessions, missions and bounded measures of autonomous activity.",
+      "stack": "Python; JSON/JSONL; event-state analysis; pytest",
+      "work": [
+        "Distinguish active motion, human waiting, safe holds, manual interventions and automatic restarts.",
+        "Keep incomplete records visible instead of treating missing instrumentation as successful autonomy."
+      ],
+      "evidence": "Exported mission_ledger.py, source provenance and three telemetry-free original unit cases.",
+      "limits": "Private robot telemetry and the full integration test suite are not exported. Accounting rules depend on the quality of event instrumentation.",
+      "attribution": "Project analysis module, with selected test imports adapted for this repository.",
+      "code": [
+        "mission_ledger.py",
+        "test_mission_ledger_units.py"
+      ]
+    },
+    {
+      "area": "robotics",
+      "slug": "multi-robot-missions",
+      "title": "Go2–drone mission orchestration",
+      "title_ko": "Go2·드론 미션 오케스트레이션",
+      "status": "Software / unit-level prototype",
+      "summary": "Translate structured missions into ROS 2 actions spanning robot skills and station coordination.",
+      "stack": "ROS 2 actions/messages; JSON schema; mission/skill servers; PX4 offboard interface; Gazebo scaffolding",
+      "work": [
+        "Mission validation and dispatch across Go2, drone and arm skill interfaces.",
+        "Station queues, battery/docking state, latched STOP and geofence checks.",
+        "Learning traces, variants and promotion scaffolding."
+      ],
+      "evidence": "eco_mission_ws README verification matrix and package layout.",
+      "limits": "Drone patrol, sampling and docking tasks are planned interfaces, not verified flights. Battery swapping and event-triggered inspection remain blocked; collision-avoidance layers are unfinished.",
+      "attribution": "Application orchestration built around ROS 2 and PX4; upstream flight control is not original work.",
+      "code": []
+    },
+    {
+      "area": "robotics",
+      "slug": "industrial-autonomy",
+      "title": "Industrial autonomy platform",
+      "title_ko": "산업 자율로봇 플랫폼",
+      "status": "Simulation / component prototype",
+      "summary": "Organize sensing, mission logic, safety checks and hardware abstraction for inspection research.",
+      "stack": "ROS 2 Jazzy; HAL interfaces; sensor-validity checks; simulation; episode export; kinematics",
+      "work": [
+        "Single mission-to-safety-to-HAL command path with stop and geofence checks.",
+        "Gas-search, shared-belief and task-allocation components, digital-twin interfaces and data export.",
+        "Arm/controller and MoveIt configuration work at software level."
+      ],
+      "evidence": "ecorobotics_platform_ws README and dated STATUS matrix.",
+      "limits": "Arm hardware, force/torque sensing and physical calibration are not validated. Some MoveIt configuration was written without an installed/verified stack. Simulation results do not establish field performance.",
+      "attribution": "Application interfaces and integration use upstream ROS/robotics tooling.",
+      "code": []
+    },
+    {
+      "area": "robotics",
+      "slug": "isaac-navigation",
+      "title": "Isaac Lab navigation and exploration studies",
+      "title_ko": "Isaac Lab 탐색·강화학습",
+      "status": "Simulation experiments",
+      "summary": "Study high-level navigation and gas exploration using controlled simulation and simple baselines.",
+      "stack": "Isaac Lab; Python; reinforcement learning; belief/heatmap representations; rollout visualization",
+      "work": [
+        "Go2/drone navigation and exploration training/evaluation paths.",
+        "Feed-forward, recurrent and reward variants, including negative results against blind patrol.",
+        "Simulation videos and contract-level checks for selected components."
+      ],
+      "evidence": "EcoRobotics tools/sim/isaac_rl documentation and rollout artifacts.",
+      "limits": "Maturity differs between modules. Existing GPU experiments were not rerun for this portfolio; simulated improvement is not hardware transfer.",
+      "attribution": "Uses Isaac Lab and upstream low-level locomotion policies. The work represented is high-level integration and evaluation.",
+      "code": []
+    },
+    {
+      "area": "aerial-mapping",
+      "slug": "px4-drone",
+      "title": "PX4 / X650 integration and SITL",
+      "title_ko": "PX4 드론 통합·SITL",
+      "status": "SITL plus hardware connection checks",
+      "summary": "Build a reproducible flight-stack integration and diagnosis workflow around an X650 / Pixhawk 6X setup.",
+      "stack": "PX4; Pixhawk 6X; MAVLink; ROS 2 message compatibility; Gazebo SITL; version locking",
+      "work": [
+        "Flight-controller connection and diagnostic tooling.",
+        "Reported generic x500 SITL offboard arm, takeoff, landing and disarm sequence.",
+        "Separate airframe identity, software versions and step-level evidence."
+      ],
+      "evidence": "ecorobotics_drone README, locked dependencies and local integration reports.",
+      "limits": "The SITL x500 is not the physical X650. Actual X650 field flight, full avionics installation and autonomous industrial inspection are not established.",
+      "attribution": "PX4 and Gazebo are upstream projects; represented work is integration, diagnosis and experiment traceability.",
+      "code": []
+    },
+    {
+      "area": "aerial-mapping",
+      "slug": "photogrammetry",
+      "title": "Photogrammetry and 3D inspection maps",
+      "title_ko": "사진측량·3D 지도 파이프라인",
+      "status": "Reconstruction / component prototype",
+      "summary": "Connect image-collection manifests to reconstruction jobs and browser-based map inspection.",
+      "stack": "Python; FastAPI; NodeODM; MinIO; Docker; ROS 2 interfaces; Three.js; 3D Tiles / GLB",
+      "work": [
+        "Collection contracts, manifest handling and reconstruction orchestration.",
+        "A locally reported NodeODM reconstruction using a public image dataset.",
+        "3D viewer and collector integration seams for aerial and ground platforms."
+      ],
+      "evidence": "ecorobotics_mapping README, core/server layout and web dependencies.",
+      "limits": "Public-dataset images are not original flight capture. Several collectors and the COLMAP path are incomplete; end-to-end airborne acquisition is not validated.",
+      "attribution": "Builds on NodeODM and other reconstruction/storage/viewer libraries; no new photogrammetry algorithm is claimed.",
+      "code": []
+    },
+    {
+      "area": "aerial-mapping",
+      "slug": "mapfuse",
+      "title": "MapFuse cross-platform map registration",
+      "title_ko": "MapFuse 지도 정합",
+      "status": "Synthetic and limited scan-pair checks",
+      "summary": "Standardize maps from different SLAM pipelines and decide when registration is acceptable or ambiguous.",
+      "stack": "PCD / metadata / TUM bundles; gravity alignment; FPFH; RANSAC; ICP; 4-DoF registration; Nav2 map export",
+      "work": [
+        "Common bundle contracts for FAST-LIO2 and RTAB-Map outputs.",
+        "Floor/gravity alignment and yaw-plus-translation registration.",
+        "Accept, reject and ambiguous decisions followed by occupancy-map export."
+      ],
+      "evidence": "mapfuse README, synthetic-test descriptions and stationary Mid-360 repeat-pair report.",
+      "limits": "A real drone-to-Go2 viewpoint-transfer experiment is not established. Synthetic tests and repeated stationary scans cover narrower conditions.",
+      "attribution": "Uses upstream registration and SLAM methods; represented work is workflow integration and decision criteria.",
+      "code": []
+    },
+    {
+      "area": "environmental-sensing",
+      "slug": "odorcore",
+      "title": "OdorCore sensing and drift infrastructure",
+      "title_ko": "OdorCore 센싱·드리프트",
+      "status": "Software / public-data work",
+      "summary": "Organize chemical observations from fixed, cartridge, handheld and laboratory sensing paths.",
+      "stack": "Python; NumPy; JSON schemas; MQTT; MOX metadata; baseline and EMA tracking",
+      "work": [
+        "Sensor-data interfaces, observation storage and chemical representation/application-head prototypes.",
+        "Monthly baseline, drift and sample-eligibility analysis.",
+        "Separate fixed-sensing infrastructure from mobile source-search applications."
+      ],
+      "evidence": "EcoRobotics monorepo README/source inventory and exported baseline_drift.py.",
+      "limits": "Application heads are not all connected to a deployed runtime. Existing in-distribution models do not establish a general olfactory foundation model. Alert thresholds are heuristic.",
+      "attribution": "Project integration and data-analysis work built with standard numerical and messaging libraries.",
+      "code": [
+        "baseline_drift.py",
+        "test_baseline_drift.py"
+      ]
+    },
+    {
+      "area": "environmental-sensing",
+      "slug": "enose-sdk",
+      "title": "Electronic-nose SDK and experiment tooling",
+      "title_ko": "전자코 SDK·실험 도구",
+      "status": "Software prototype",
+      "summary": "Package electronic-nose data handling and experiments into reusable software components.",
+      "stack": "Python SDK; sensor schemas; data adapters; scripts; tests; firmware integration scaffolding",
+      "work": [
+        "SDK modules and reproducible script/test organization.",
+        "Data ingestion and experiment support for multiple sensor-array corpora.",
+        "Interface work spanning host software and firmware-related artifacts."
+      ],
+      "evidence": "Electronic-nose project enose_sdk, firmware, scripts, tests, pyproject and REPORT.",
+      "limits": "The existence of software and firmware files does not prove an assembled, calibrated sensor system. This release documents the SDK but does not redistribute its full source.",
+      "attribution": "Original integration scope is separated from public datasets and third-party dependencies.",
+      "code": []
+    },
+    {
+      "area": "environmental-sensing",
+      "slug": "mox-transfer",
+      "title": "MOX cross-array and cross-device transfer",
+      "title_ko": "MOX 어레이·개체 간 전이",
+      "status": "Dataset experiments / manuscript preparation",
+      "summary": "Test whether sensor alignment scores predict useful transfer to unseen analytes, devices or laboratories.",
+      "stack": "MOX time-series processing; direct / piecewise direct standardization; fine-tuning; retrieval evaluation; controls",
+      "work": [
+        "Alignment-score versus held-out-analyte retrieval comparisons.",
+        "Same-array/different-device transfer, zero-shot limitations and paired-calibration studies.",
+        "Peer-sensor anchors and negative-result investigations."
+      ],
+      "evidence": "Electronic-nose REPORT, experiment/draft directories and enose_ml inventory.",
+      "limits": "Dataset results are not measurements collected by a newly fabricated platform. Draft variants and negative-result notes are related studies, not separate accepted papers.",
+      "attribution": "Public sensor corpora retain their original ownership; the represented work is analysis and experiment design.",
+      "code": []
+    },
+    {
+      "area": "environmental-sensing",
+      "slug": "gas-data-quality",
+      "title": "Gas-sensor data and metadata audits",
+      "title_ko": "가스센서 데이터·메타데이터 감사",
+      "status": "Research analyses / candidate studies",
+      "summary": "Audit whether public sensor data contain enough trustworthy information for transfer and physical interpretation.",
+      "stack": "Corpus/setup cards; metadata audits; response-curve extraction; time-series analysis; missingness analysis",
+      "work": [
+        "Corpus defects, exposure/air-path reporting gaps and response-curve extraction.",
+        "MOX/PID response lag, temperature/humidity transfer and air-path identifiability investigations.",
+        "Compact olfactory summaries and cross-laboratory response inconsistency."
+      ],
+      "evidence": "gas_data_quality and enose_ml inventories, cross-referenced with the sensing research tree.",
+      "limits": "Several entries are research candidates or method studies. No new measurements, complete benchmark rerun or accepted dataset publication is claimed by this index.",
+      "attribution": "Audits concern third-party public corpora and datasheets; raw third-party material is not redistributed.",
+      "code": []
+    },
+    {
+      "area": "environmental-sensing",
+      "slug": "sensor-pcb",
+      "title": "Environmental sensor PCB design",
+      "title_ko": "환경센서 PCB 설계",
+      "status": "Design / fabrication exports",
+      "summary": "Prepare a USB-C / Wi-Fi / BLE environmental-sensor board design and manufacturing export set.",
+      "stack": "PCB CAD; Gerber; IPC-2581; BOM; pick-and-place; 3D mechanical exports",
+      "work": [
+        "Board-design artifacts and fabrication-facing files.",
+        "Mechanical/electrical exchange formats supporting design review."
+      ],
+      "evidence": "Environmental-sensor PCB design directory and its CAD/manufacturing file inventory.",
+      "limits": "Fabrication exports are not evidence of fabrication, bring-up, calibration or RF/electrical certification. Raw design files and procurement documents are not included here.",
+      "attribution": "Design artifacts are represented without asserting ownership of component models, footprints or vendor IP.",
+      "code": []
+    },
+    {
+      "area": "environmental-sensing",
+      "slug": "acoustic-sensing",
+      "title": "Acoustic sensing and array studies",
+      "title_ko": "청각 센싱·마이크 어레이 연구",
+      "status": "Public-data software / hardware concept",
+      "summary": "Develop audio-data preparation and learning workflows alongside environmental sensing.",
+      "stack": "Python; DCASE / IDMT datasets; acoustic-format conversion; training/evaluation scripts; array-processing studies",
+      "work": [
+        "Public-audio download/conversion and pretraining/fine-tuning/evaluation paths.",
+        "Synthetic array-processing investigations and a 16-channel 3D array concept."
+      ],
+      "evidence": "EcoRobotics tools/acoustic README and earlier sensing/strategy evidence audit.",
+      "limits": "Public datasets and synthetic direction-of-arrival studies do not establish a built or validated 16-channel array.",
+      "attribution": "Public audio corpora and classical array-processing methods are upstream resources.",
+      "code": []
+    },
+    {
+      "area": "gas-localization",
+      "slug": "gsl-evaluation",
+      "title": "Gas-source search and evaluation",
+      "title_ko": "가스원 탐색·평가 방법",
+      "status": "Simulation research / manuscript preparation",
+      "summary": "Separate gas contact, source proximity and verified arrival when comparing search strategies.",
+      "stack": "Python; simulation; GADEN integration; OFAT sensitivity; independent scoring; baseline comparisons",
+      "work": [
+        "Coverage, gradient and belief-based search comparisons and failure attribution.",
+        "Arrival/scorer consistency, sensitivity studies and simulator reproducibility investigations.",
+        "September 2026 research-presentation material and related manuscript preparation."
+      ],
+      "evidence": "GSL evaluation artifacts, presentation material, paper inventory and MAPIR/GADEN integration workspace.",
+      "limits": "Reported simulations were not rerun for this release. Physical Go2 gas localization remains future validation. Manuscript revisions are not separate publications.",
+      "attribution": "GADEN, MAPIR gas-localization components and upstream simulators are credited as dependencies.",
+      "code": []
+    },
+    {
+      "area": "gas-localization",
+      "slug": "coded-tracer",
+      "title": "Coded-tracer source identification",
+      "title_ko": "코드 변조 추적가스 누출원 식별",
+      "status": "Synthetic studies / experiment design",
+      "summary": "Design measurements that identify a source-to-sensor response matrix for source ranking.",
+      "stack": "Coded excitation; transfer-matrix identification; synthetic response models; candidate ranking; baseline comparison",
+      "work": [
+        "Code-modulated tracer experiment design and response-matrix estimation.",
+        "Measured-library-versus-nominal-model study design, currently using synthetic data.",
+        "Testbench and measurement planning."
+      ],
+      "evidence": "Leak-source platform project and leak_platform_misc inventory.",
+      "limits": "The measurement-led method is a research direction; no physical response-matrix library or factory leak trial is established. Synthetic data labelled as measured-library scenarios remain synthetic.",
+      "attribution": "Project modelling and experimental design; no claim of industrial deployment or certified leak detection.",
+      "code": []
+    },
+    {
+      "area": "gas-localization",
+      "slug": "sensor-network-methods",
+      "title": "Sensor-network scoring and AMC research",
+      "title_ko": "감지망 성적표·AMC 연구",
+      "status": "Methods / simulation / literature work",
+      "summary": "Evaluate source identifiability and sensor placement under missing, censored or ambiguous observations.",
+      "stack": "Sensor placement; censored likelihood; abstention; source ranking; literature coding; response-kernel design",
+      "work": [
+        "AMC source-ranking and abstention studies with synthetic observations.",
+        "Measurement-based detection-network scorecard formats and sensor-layout questions.",
+        "Fab/AMC tracing review, GSL evaluation-design coding and MOX response-kernel measurement plans."
+      ],
+      "evidence": "Leak-platform inventory, T2/T3 research notes and sensing research inventory.",
+      "limits": "Method proposals and literature analyses have different maturity from completed experiments. Real fab measurements and confirmed sensor-network performance are absent.",
+      "attribution": "Research synthesis cites external literature in the original private research notes; those manuscripts are not republished here.",
+      "code": []
+    },
+    {
+      "area": "robot-learning-data",
+      "slug": "oclo-timing",
+      "title": "OCLO timing and dataset integrity",
+      "title_ko": "OCLO 시간 동기화·데이터 무결성",
+      "status": "Research software / public-data analyses",
+      "summary": "Make multimodal robot-learning records auditable in terms of clocks, sampling and declared structure.",
+      "stack": "Python; clock mapping; episode writing; LeRobot-related formats; timestamp precision; metadata validation",
+      "work": [
+        "Clock mapping/synchronization and episode/data-integrity tooling.",
+        "Timestamp tolerance, storage precision and declared-fps-versus-runtime-Hz investigations.",
+        "Public ecosystem declaration audits and author-fix-based evaluation ideas."
+      ],
+      "evidence": "OCLO software tree and robot_learning_data inventory.",
+      "limits": "Structural validity does not guarantee policy performance. Historical audits were not re-executed here and public dataset contents are not redistributed.",
+      "attribution": "Uses OpenGraph/LeRobot-related formats and public benchmarks; upstream data and software retain their attribution.",
+      "code": []
+    },
+    {
+      "area": "robot-learning-data",
+      "slug": "fault-cost",
+      "title": "Fault injection and downstream cost",
+      "title_ko": "결함 주입·학습 성능 영향",
+      "status": "Published source / experiment analyses",
+      "summary": "Study how timing and modality faults affect downstream learning rather than relying only on fault-detection accuracy.",
+      "stack": "Python; NumPy; seeded synthetic faults; clock jitter/drift; dropped/duplicate samples; tactile/audio corruption",
+      "work": [
+        "Deterministic synthetic clock and virtual-modality fault generators.",
+        "Downstream policy and tactile contact-phase corruption studies in local research artifacts."
+      ],
+      "evidence": "Exported fault_injection.py and OCLO research inventory.",
+      "limits": "Included source is a fault generator, not the complete downstream benchmark. Results depend on data, corruption type and seeds; no universal robustness claim is made.",
+      "attribution": "OCLO export retains its Apache-2.0 license and original attribution.",
+      "code": [
+        "fault_injection.py",
+        "LICENSE-OCLO-APACHE-2.0.txt"
+      ]
+    },
+    {
+      "area": "robot-learning-data",
+      "slug": "capture-quality",
+      "title": "Capture-engine quality checks",
+      "title_ko": "멀티모달 캡처·품질 검사",
+      "status": "Synthetic capture / software scaffold",
+      "summary": "Track required streams and quality signals before treating a captured episode as usable training data.",
+      "stack": "Python; dual timestamps; device sequence numbers; provenance; completeness; packet-gap / drift checks",
+      "work": [
+        "Required-stream and completeness checks with synchronization diagnostics.",
+        "Taxel-health and calibration-gate concepts in the capture workflow."
+      ],
+      "evidence": "EcoRobotics tools/capture_engine README and software layout.",
+      "limits": "The inspected workflow includes synthetic scaffolding. Its checks are not proof of a physically validated multimodal acquisition rig.",
+      "attribution": "Capture/QC integration work is separate from upstream sensor drivers and learning frameworks.",
+      "code": []
+    },
+    {
+      "area": "robot-learning-data",
+      "slug": "oclo-hardware",
+      "title": "OCLO wearable and rig design work",
+      "title_ko": "OCLO 글러브·동기화 보드·리그 설계",
+      "status": "Hardware / firmware planning",
+      "summary": "Explore hardware arrangements for synchronized egocentric, tactile and robot-interaction data.",
+      "stack": "Glove/rig design; sync-hub and microcontroller firmware scaffolding; PCB planning; interface/procurement studies",
+      "work": [
+        "Glove, synchronization and capture-rig design artifacts.",
+        "Firmware and robot-interface planning supporting the data-quality research direction."
+      ],
+      "evidence": "OCLO hardware/firmware project inventory and project README.",
+      "limits": "Design and procurement studies do not establish a fabricated or validated glove, synchronization board or robot arm.",
+      "attribution": "Hardware concepts are separated from vendor designs and third-party component specifications.",
+      "code": []
+    },
+    {
+      "area": "operations",
+      "slug": "ecohub-protocol",
+      "title": "EcoHub cloud-protocol services",
+      "title_ko": "EcoHub 드론 프로토콜 서비스",
+      "status": "Software implementation",
+      "summary": "Implement device messaging and operator-facing services around a DJI Cloud API-compatible protocol surface.",
+      "stack": "TypeScript; Node.js; MQTT; HTTPS; WebSocket; WPML/KMZ; RTMP/HTTP-FLV; journal/snapshot persistence",
+      "work": [
+        "Message envelopes, device shadows/topology and correlated command timeouts.",
+        "Flight-task state, mission-file handling, media callbacks and health events.",
+        "Streaming/operator-console paths and specification/evidence tracking."
+      ],
+      "evidence": "ecohub README, package metadata and source/test organization.",
+      "limits": "Protocol compatibility is a software objective, not DJI certification or verified parity with every hardware/firmware combination. No full hardware fleet test is claimed.",
+      "attribution": "Implementation uses external protocol specifications and libraries; DJI products and protocol ownership remain third party.",
+      "code": []
+    },
+    {
+      "area": "operations",
+      "slug": "odorhub-live",
+      "title": "OdorHub Live Ops interface",
+      "title_ko": "OdorHub Live Ops 관제 웹앱",
+      "status": "Simulator-backed web prototype",
+      "summary": "Provide a map-centred operations interface for drone and ground-robot mission supervision.",
+      "stack": "Next.js; React; Tailwind CSS; MapLibre; NestJS; Socket.IO; TypeScript",
+      "work": [
+        "Operations, liveview, missions, devices, callbacks, mapping, site operations and settings views.",
+        "Virtual-drone and Go2 telemetry, simulated commands and synthetic camera paths.",
+        "Deployable frontend/backend shape with documented demo-state limits."
+      ],
+      "evidence": "arrayhub repository README and frontend/backend structure, titled OdorHub Live Ops.",
+      "limits": "The inspected demo is simulator-backed. Virtual commands and video stubs do not constitute live hardware control.",
+      "attribution": "Application development uses established UI, map and backend frameworks.",
+      "code": []
+    },
+    {
+      "area": "operations",
+      "slug": "odorhub-api",
+      "title": "OdorHub API and deployment packaging",
+      "title_ko": "OdorHub API·배포 패키징",
+      "status": "Application / deployment tooling",
+      "summary": "Extract a deployable sensing application from a larger research monorepo.",
+      "stack": "Python; API/services; Docker; Render configuration; Supabase state; deployment sync scripts",
+      "work": [
+        "API, connector and sensing-service packaging.",
+        "Generated deployment tree and repeatable synchronization from the source monorepo.",
+        "Persistent-state configuration and documentation of ephemeral SQLite limitations."
+      ],
+      "evidence": "odorhub-deploy README/tree and EcoRobotics deployment tooling.",
+      "limits": "The deployment tree is a generated slice of the monorepo, not another independent platform invention. No current uptime, customer count or production security claim is made.",
+      "attribution": "Project application packaging integrates third-party hosting and storage services.",
+      "code": []
+    },
+    {
+      "area": "persontwin",
+      "slug": "personalized-prediction",
+      "title": "PersonTwin behavioural prediction",
+      "title_ko": "PersonTwin 행동 예측·기준선",
+      "status": "Research prototype / public-data experiments",
+      "summary": "Test whether a person-specific model predicts unseen behaviour better than simple alternatives.",
+      "stack": "Python; LLM evaluation; memory/retrieval; person-disjoint splits; duplicate checks; ablations; bootstrap intervals",
+      "work": [
+        "Interview/transcript-based prediction pipelines and memory/persona modules.",
+        "Persuasion for Good and Twin-2K-style baseline and personalization comparisons.",
+        "Checks for person overlap, transcript duplicates, answer leakage and wrong-person controls."
+      ],
+      "evidence": "PersonTwin source/reports, corrected project dossier and exported split_check.py.",
+      "limits": "Historical PFG correlation was approximately matched by a simple amount-extraction baseline. Incremental personalization benefit and a general digital copy of a person are not established.",
+      "attribution": "Research uses public corpora; their participants were not recruited for this portfolio.",
+      "code": [
+        "split_check.py",
+        "test_split_check.py"
+      ]
+    },
+    {
+      "area": "persontwin",
+      "slug": "theory-evaluation",
+      "title": "Theory-informed comparison harness",
+      "title_ko": "이론 기반 예측 비교·평가 하네스",
+      "status": "Evaluation software prototype",
+      "summary": "Compare prompt-based behavioural models while keeping inputs, budgets and evaluation units explicit.",
+      "stack": "Python; prompt adapters; input hashing; paired bootstrap; Holm correction; participant/group units",
+      "work": [
+        "Park-inspired and theory-informed RAM, attribution, CAPS and TPB-related comparison adapters.",
+        "Label/input separation, common budgets and quality/missingness handling.",
+        "Counterevidence and first-impression/halo-related evaluation questions."
+      ],
+      "evidence": "PersonTwin theory_eval README and research inventory.",
+      "limits": "Adapters are controlled prompts, not separately trained neural networks or a reproduction of proprietary Simile. Observational measures are not ground truth for general personality.",
+      "attribution": "Theory and public research instruments are external sources; copyrighted instrument contents are not redistributed.",
+      "code": []
+    },
+    {
+      "area": "persontwin",
+      "slug": "intuition-priors",
+      "title": "Task-specific intuition priors",
+      "title_ko": "직감 사전모형·검증",
+      "status": "Development / evaluation prototype",
+      "summary": "Test whether an explicit fast prior improves a later person-specific prediction.",
+      "stack": "Lexical priors; nested / out-of-fold evaluation; manifests and hashes; held-out prediction records; feedback logs",
+      "work": [
+        "Task-specific prior construction and development/held-out separation.",
+        "Grounded, prospective and typed-decision experimental branches.",
+        "Explicit feedback records with negative results retained in the research inventory."
+      ],
+      "evidence": "PersonTwin intuition_twin README and corresponding prediction research notes.",
+      "limits": "No validated mental-state inference or autonomous online learning is established. A prior can make results worse; usefulness remains an empirical question.",
+      "attribution": "Project evaluation logic is distinct from the underlying language models.",
+      "code": []
+    },
+    {
+      "area": "persontwin",
+      "slug": "multimodal-interview",
+      "title": "Multimodal interview measurements",
+      "title_ko": "인터뷰 음성·얼굴·비언어 측정",
+      "status": "Measurement software prototype",
+      "summary": "Summarize bounded interview signals with explicit timing, quality and missingness.",
+      "stack": "Audio/face capture; shared clock; speech onset; pause/pitch summaries; head motion; aggregate feature records",
+      "work": [
+        "Per-session signal summaries with sampling denominators and quality markers.",
+        "Within-person baseline comparisons and nonverbal feature/cluster investigations.",
+        "Voice-interface, browser-extension and local TTS integration artifacts."
+      ],
+      "evidence": "PersonTwin video_twin/multimodal README, chrome_ext files and voice interface modules.",
+      "limits": "Measurements are not diagnoses or validated emotion/personality labels. Feature stability does not prove reproducible behavioural types. Raw audio/face records are not included.",
+      "attribution": "Capture and application integration rely on external models and browser/media facilities.",
+      "code": []
+    },
+    {
+      "area": "persontwin",
+      "slug": "interview-protocol",
+      "title": "Interview and retest collection protocol",
+      "title_ko": "인터뷰·재검사 수집 프로토콜",
+      "status": "Protocol / collection software draft",
+      "summary": "Make consent, question versions and repeated measurement explicit in a person-modelling study.",
+      "stack": "Country/language instrument versions; consent/checkpoints; withdrawal; frozen instruments; retest scheduling",
+      "work": [
+        "Independently written life-history interview questions and a bounded interview budget.",
+        "Separation of US instruments, Korean translations and Korean adaptations.",
+        "Collection-state, withdrawal and delayed-retest workflow design."
+      ],
+      "evidence": "PersonTwin park_collection README and protocol layout.",
+      "limits": "Protocol code is not evidence of recruited participants, ethics approval or validated translation. Original third-party question tables and restricted instruments are not republished.",
+      "attribution": "Research-protocol adaptation is distinguished from the original Park-related study and external instruments.",
+      "code": []
+    },
+    {
+      "area": "persontwin",
+      "slug": "participant-portal",
+      "title": "P1 participant and research portal",
+      "title_ko": "P1 참여자·연구 포털",
+      "status": "Web application prototype",
+      "summary": "Connect interview participation, survey/game tasks and retest administration in one workflow.",
+      "stack": "Python router/services; SQLite store layer; consent/flow state; task modules; external-AI interfaces",
+      "work": [
+        "Participant entry, interviews and consent/collection state.",
+        "Survey/game tasks, twin-prediction and model-comparison interfaces.",
+        "Retest/research administration and verification/mailer integration modules."
+      ],
+      "evidence": "PersonTwin video_twin/p1 source-module inventory.",
+      "limits": "Module presence does not establish production readiness, study recruitment or delivery reliability. Runtime records and participant databases are excluded.",
+      "attribution": "Application workflow is separate from underlying model providers and external messaging services.",
+      "code": []
+    },
+    {
+      "area": "persontwin",
+      "slug": "coach-service",
+      "title": "PersonTwin Coach / Maeumgil",
+      "title_ko": "마음길 코칭 서비스",
+      "status": "Application prototype",
+      "summary": "Explore interview-informed coaching interactions with explicit safety and scale-handling components.",
+      "stack": "Python; router/store modules; external-AI adapter; safety handling; scale interfaces",
+      "work": [
+        "Coaching conversation and persisted application-state modules.",
+        "Dedicated safety and scale-processing code paths."
+      ],
+      "evidence": "PersonTwin video_twin/coach module inventory and docstrings.",
+      "limits": "No clinical efficacy, diagnostic validity or production safety assurance is claimed. Private conversations, scale responses and account records are excluded.",
+      "attribution": "Application prototype builds on external language models; clinical instruments, where used, retain their own terms.",
+      "code": []
+    },
+    {
+      "area": "persontwin",
+      "slug": "character-service",
+      "title": "TTONA interview-based characters",
+      "title_ko": "또나 인터뷰 기반 캐릭터",
+      "status": "Application prototype",
+      "summary": "Turn interview-derived material into a character interaction workflow.",
+      "stack": "Python; router/service/store modules; interview-derived context; application state",
+      "work": [
+        "Character-oriented interaction routes and storage organization.",
+        "Integration with the broader PersonTwin account/material workflow."
+      ],
+      "evidence": "PersonTwin video_twin/character source inventory and branded application artifacts.",
+      "limits": "A generated character is not a validated replica or proof of behavioural fidelity. Private interviews and runtime storage are excluded.",
+      "attribution": "Character application logic is distinct from the underlying LLM and any user-owned material.",
+      "code": []
+    },
+    {
+      "area": "persontwin",
+      "slug": "twinchat-memory",
+      "title": "TwinChat and personal memory",
+      "title_ko": "TwinChat·개인 기억·과거의 나 대화",
+      "status": "Application prototype",
+      "summary": "Explore conversations grounded in explicit source material and time-specific self snapshots.",
+      "stack": "Python; retrieval/memory; source tracking; conversation lenses; diary inputs; tool-history checks",
+      "work": [
+        "Self, duet, change and current-self conversation modes.",
+        "Memory/source modules and checks linking answers to available material.",
+        "Diary and past-self snapshot integration."
+      ],
+      "evidence": "PersonTwin video_twin/twinchat service, memory, sources, checks and lenses modules.",
+      "limits": "Source tracking does not guarantee factuality or psychological accuracy. No private diary, conversation or derived identity record is published.",
+      "attribution": "Application orchestration uses external model interfaces and user-provided source material.",
+      "code": []
+    },
+    {
+      "area": "persontwin",
+      "slug": "identity-ops",
+      "title": "Shared identity, TwinHub and operations",
+      "title_ko": "공통 계정·TwinHub·운영 관리",
+      "status": "Supporting application services",
+      "summary": "Coordinate identity and permitted material across PersonTwin applications.",
+      "stack": "Python; account router/store; operations routes; link-code matching; consent labels; withdrawal/deletion paths",
+      "work": [
+        "Shared-account interfaces and application-specific stores.",
+        "TwinHub material aggregation using an explicit shared linking code.",
+        "Operations/audit interfaces and handling paths for withdrawal or deletion."
+      ],
+      "evidence": "PersonTwin video_twin/account, ops and twin_hub.py source inventory.",
+      "limits": "Code paths are not an independent privacy/security audit. Runtime account databases, invitation/admin credentials and operational manifests are not included.",
+      "attribution": "Supporting services are components of the same PersonTwin family, not independent research papers.",
+      "code": []
+    },
+    {
+      "area": "persontwin",
+      "slug": "generative-agents-reproduction",
+      "title": "Generative Agents reproduction",
+      "title_ko": "Generative Agents·Smallville 재현",
+      "status": "Upstream-based reproduction work",
+      "summary": "Adapt an existing social-agent simulator for headless execution and locally served open models.",
+      "stack": "Python; LLM-call adapters; headless simulation; patch-based changes; behavioural-log analysis",
+      "work": [
+        "Headless frontend/runner and model-interface compatibility adaptations.",
+        "Local reports of small- and larger-agent runs and analyses of information spread and coordination.",
+        "Explicit reproduction patch and documented compatibility fixes."
+      ],
+      "evidence": "generative_agents repro/report_source.md and reproduction_changes.patch.",
+      "limits": "Historical runs were not repeated here. No numerical parity or superiority claim is revalidated by this catalog. This is a reproduction contribution, not authorship of the original agent architecture.",
+      "attribution": "Original work: Park and collaborators, joonspk-research/generative_agents. Upstream source is not redistributed in this portfolio.",
+      "code": []
+    },
+    {
+      "area": "applications",
+      "slug": "mining-solar-research",
+      "title": "Mining and solar inspection research planning",
+      "title_ko": "마이닝·태양광 점검 연구 기획",
+      "status": "Proposed applications",
+      "summary": "Connect existing sensing and robotics work to prospective industrial inspection research.",
+      "stack": "Research-roadmap design; edge inspection; fixed/mobile sensing; experiment and field-validation planning",
+      "work": [
+        "Western Australia mining and solar application/technology mapping.",
+        "Korea proof-of-concept and field-evaluation planning.",
+        "Proposed uncertainty-aware patrol, event follow-up and leak investigation with edge robots."
+      ],
+      "evidence": "ecorobotics_wa_strategy roadmap, proof-of-concept and evaluation-planning documents.",
+      "limits": "These are intended research directions. No mine, solar-farm deployment, industrial partner commitment or funded position is asserted.",
+      "attribution": "Application planning builds on the implemented and exploratory components documented in the other areas.",
+      "code": []
+    }
+  ]
+}

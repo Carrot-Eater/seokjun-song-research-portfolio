@@ -9,3 +9,9 @@ Checked on 12 October 2026.
 - Historical research results, live robot operation and full original repositories were not rerun by these checks.
 
 Original working repositories were not changed. Tests write synthetic temporary data only.
+
+## Expanded catalog checks
+
+The same-day catalog update adds eight field indexes and 36 work-item pages, excluding coursework and including PersonTwin applications. Checked 52 Markdown files and 300 relative links: no broken targets. A scan of the publication candidate found no private-key blocks, common credential-token patterns, private IPv4 addresses or absolute home paths.
+
+All seven exported Python implementation/test files are byte-for-byte unchanged from the initial release. The earlier 36-test result therefore remains the source-snapshot validation record; tests and historical experiments were not rerun for this documentation-only expansion. The checks validate navigation and publication hygiene, not every project's research claims.
